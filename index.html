@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner"></div>
+        <div class="preloader-text">EduAdmin Dashboard</div>
+    </div>
+
+    <!-- Starry Background Canvas -->
+    <canvas id="star-canvas"></canvas>
+
+    <!-- Main Wrapper -->
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="glass-panel" id="sidebar">
+            <div class="sidebar-heading text-center py-4 fs-4 fw-bold text-uppercase border-bottom border-secondary d-flex align-items-center justify-content-center gap-2">
+                <i class="fa-solid fa-graduation-cap" style="color: var(--accent-primary);"></i>
+                <span class="text-white">Edu<span style="color: var(--accent-primary);">Admin</span></span>
+            </div>
+            <div class="list-group list-group-flush my-3">
+                <a href="index.html" class="list-group-item list-group-item-action bg-transparent active"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
+                <a href="students.html" class="list-group-item list-group-item-action bg-transparent"><i class="fas fa-user-graduate me-2"></i>Students</a>
+                <a href="teachers.html" class="list-group-item list-group-item-action bg-transparent"><i class="fas fa-chalkboard-teacher me-2"></i>Teachers</a>
+                <a href="courses.html" class="list-group-item list-group-item-action bg-transparent"><i class="fas fa-book me-2"></i>Courses</a>
+                <a href="reports.html" class="list-group-item list-group-item-action bg-transparent"><i class="fas fa-chart-line me-2"></i>Reports</a>
+                <a href="settings.html" class="list-group-item list-group-item-action bg-transparent"><i class="fas fa-cog me-2"></i>Settings</a>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper" class="w-100">
+            <nav class="navbar navbar-expand-lg glass-panel py-3 px-4 mb-4">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-bars fs-4 me-3 text-white" id="menu-toggle"></i>
+                    <h2 class="fs-4 m-0 text-white fw-semibold">Dashboard Overview</h2>
+                </div>
+                <div class="ms-auto d-flex align-items-center gap-3">
+                    <div class="position-relative d-none d-md-block">
+                        <input type="text" class="form-control rounded-pill search-input ps-4" placeholder="Search records..." style="width:230px;">
+                        <i class="fas fa-search position-absolute top-50 start-0 translate-middle-y ms-2 text-secondary"></i>
+                    </div>
+                    <div class="position-relative">
+                        <button class="action-icon-btn position-relative" title="Notifications">
+                            <i class="fas fa-bell"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:0.6rem; transform: translate(-30%, -30%) !important;">3</span>
+                        </button>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 ps-2 border-start border-secondary">
+                        <img src="https://ui-avatars.com/api/?name=Admin+User&background=10b981&color=fff" alt="Profile" class="rounded-circle" width="38" height="38" style="border: 2px solid rgba(16, 185, 129, 0.4);">
+                        <div class="d-none d-lg-block text-start">
+                            <div class="text-white small fw-bold leading-none">Admin User</div>
+                            <div class="text-secondary" style="font-size:0.75rem;">Super Admin</div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-fluid px-4">
+
+                <!-- Welcome Banner -->
+                <div class="welcome-banner mb-4">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8">
+                            <div class="d-flex align-items-center gap-2 mb-2">
+                                <span class="badge" style="background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3);">
+                                    <i class="fas fa-shield-alt me-1"></i> Academic Session 2026-27
+                                </span>
+                            </div>
+                            <h3 class="text-white fw-bold mb-1">Welcome back, Admin! 👋</h3>
+                            <p class="text-secondary mb-0">System status is optimal. You have <span class="text-white fw-semibold" style="color: #10b981 !important;">12 new enrollments</span> this week and <span class="text-white fw-semibold" style="color: #f59e0b !important;">3 pending approvals</span>.</p>
+                        </div>
+                        <div class="col-lg-4 text-end d-none d-lg-block">
+                            <div class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);">
+                                <i class="fas fa-calendar-alt" style="color: var(--accent-secondary);"></i>
+                                <span class="text-white small fw-medium" id="currentDate">Thursday, September 10, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Row -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="stat-card emerald">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div class="stat-icon emerald-icon">
+                                    <i class="fas fa-user-graduate"></i>
+                                </div>
+                                <span class="stat-change up"><i class="fas fa-arrow-up"></i> 12%</span>
+                            </div>
+                            <div class="stat-value" data-target="1245">0</div>
+                            <div class="stat-label mt-1">Total Students</div>
+                            <div class="progress mt-3" style="height:4px;background:rgba(255,255,255,0.05);">
+                                <div class="progress-bar" style="width:83%;background:linear-gradient(90deg,#10b981,#059669);border-radius:4px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="stat-card amber">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div class="stat-icon amber-icon">
+                                    <i class="fas fa-chalkboard-teacher"></i>
+                                </div>
+                                <span class="stat-change up"><i class="fas fa-arrow-up"></i> 5%</span>
+                            </div>
+                            <div class="stat-value" data-target="85">0</div>
+                            <div class="stat-label mt-1">Faculty Members</div>
+                            <div class="progress mt-3" style="height:4px;background:rgba(255,255,255,0.05);">
+                                <div class="progress-bar" style="width:70%;background:linear-gradient(90deg,#f59e0b,#d97706);border-radius:4px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="stat-card orange">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div class="stat-icon orange-icon">
+                                    <i class="fas fa-book-open"></i>
+                                </div>
+                                <span class="stat-change up"><i class="fas fa-arrow-up"></i> 8%</span>
+                            </div>
+                            <div class="stat-value" data-target="42">0</div>
+                            <div class="stat-label mt-1">Active Courses</div>
+                            <div class="progress mt-3" style="height:4px;background:rgba(255,255,255,0.05);">
+                                <div class="progress-bar" style="width:60%;background:linear-gradient(90deg,#f97316,#ea580c);border-radius:4px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="stat-card coral">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div class="stat-icon coral-icon">
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                                <span class="stat-change down"><i class="fas fa-arrow-down"></i> 2%</span>
+                            </div>
+                            <div class="stat-value" data-target="12500" data-prefix="$" data-suffix="">0</div>
+                            <div class="stat-label mt-1">Monthly Revenue</div>
+                            <div class="progress mt-3" style="height:4px;background:rgba(255,255,255,0.05);">
+                                <div class="progress-bar" style="width:55%;background:linear-gradient(90deg,#f43f5e,#e11d48);border-radius:4px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions Bar -->
+                <div class="row g-3 mb-4">
+                    <div class="col">
+                        <a href="students.html" class="quick-action">
+                            <div class="action-icon" style="background:rgba(16,185,129,0.15);color:#10b981;">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div class="small fw-semibold">Add Student</div>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="courses.html" class="quick-action">
+                            <div class="action-icon" style="background:rgba(245,158,11,0.15);color:#f59e0b;">
+                                <i class="fas fa-layer-group"></i>
+                            </div>
+                            <div class="small fw-semibold">Courses</div>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="reports.html" class="quick-action">
+                            <div class="action-icon" style="background:rgba(244,63,94,0.15);color:#f43f5e;">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <div class="small fw-semibold">Analytics</div>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="teachers.html" class="quick-action">
+                            <div class="action-icon" style="background:rgba(249,115,22,0.15);color:#f97316;">
+                                <i class="fas fa-chalkboard"></i>
+                            </div>
+                            <div class="small fw-semibold">Teachers</div>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="settings.html" class="quick-action">
+                            <div class="action-icon" style="background:rgba(99,102,241,0.15);color:#818cf8;">
+                                <i class="fas fa-sliders-h"></i>
+                            </div>
+                            <div class="small fw-semibold">Settings</div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-8">
+                        <div class="chart-card h-100" style="min-height: 380px;">
+                            <div class="chart-card-header">
+                                <h5 class="section-title">Academic Performance & Attendance</h5>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm rounded-pill px-3 active" style="font-size:0.75rem; background: rgba(16,185,129,0.2); border: 1px solid #10b981; color: #fff;">Monthly</button>
+                                    <button class="btn btn-sm rounded-pill px-3" style="font-size:0.75rem; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: var(--text-muted);">Yearly</button>
+                                </div>
+                            </div>
+                            <div class="chart-card-body">
+                                <div style="position:relative;height:280px;width:100%">
+                                    <canvas id="performanceChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="chart-card h-100" style="min-height: 380px;">
+                            <div class="chart-card-header">
+                                <h5 class="section-title">Attendance Ratio</h5>
+                            </div>
+                            <div class="chart-card-body">
+                                <div style="position:relative;height:280px;width:100%">
+                                    <canvas id="attendanceChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Row: Redesigned Recent Enrollments + Activity Feed -->
+                <div class="row g-4 mb-4">
+                    <!-- Modern SaaS Recent Enrollments Section -->
+                    <div class="col-lg-8">
+                        <div class="enrollment-card shadow-sm">
+                            <div class="enrollment-header">
+                                <div>
+                                    <h5 class="section-title mb-1">Recent Enrollments</h5>
+                                    <small class="text-secondary">Students recently registered in semester courses</small>
+                                </div>
+                                <div class="d-flex align-items-center gap-2">
+                                    <button class="enrollment-filter-btn active">All (12)</button>
+                                    <button class="enrollment-filter-btn">Active</button>
+                                    <button class="enrollment-filter-btn">Pending</button>
+                                    <a href="students.html" class="btn btn-sm btn-outline-light rounded-pill px-3 ms-2" style="font-size: 0.8rem; border-color: rgba(255,255,255,0.15);">
+                                        View All <i class="fas fa-arrow-right ms-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="table-responsive">
+                                <table class="enrollment-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Student</th>
+                                            <th>Enrolled Course</th>
+                                            <th>Date</th>
+                                            <th>GPA / Score</th>
+                                            <th>Status</th>
+                                            <th class="text-end">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-3">
+                                                    <div class="student-avatar-box">
+                                                        <img src="https://ui-avatars.com/api/?name=Alex+Johnson&background=10b981&color=fff" class="student-avatar" alt="Alex">
+                                                        <span class="online-indicator"></span>
+                                                    </div>
+                                                    <div>
+                                                        <div class="student-name">Alex Johnson</div>
+                                                        <div class="student-id"><i class="fas fa-id-card me-1"></i>#STU-001 • Year 2</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-badge">
+                                                    <i class="fas fa-laptop-code" style="color: #10b981;"></i>
+                                                    <span>Computer Science</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="text-secondary small">
+                                                    <i class="far fa-calendar-alt me-1"></i>Oct 24, 2026
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="gpa-tag">
+                                                    <i class="fas fa-star text-warning" style="font-size: 0.75rem;"></i>
+                                                    <span>3.9 GPA</span>
+                                                </div>
+                                                <div class="progress mt-1" style="height: 3px; width: 60px; background: rgba(255,255,255,0.08);">
+                                                    <div class="progress-bar" style="width: 92%; background: #10b981;"></div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="status-pill active">
+                                                    <span class="status-dot"></span> Active
+                                                </span>
+                                            </td>
+                                            <td class="text-end">
+                                                <a href="students.html" class="action-icon-btn" title="View Profile">
+                                                    <i class="fas fa-external-link-alt" style="font-size: 0.8rem;"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-3">
+                                                    <div class="student-avatar-box">
+                                                        <img src="https://ui-avatars.com/api/?name=Maria+Garcia&background=f59e0b&color=000" class="student-avatar" alt="Maria">
+                                                        <span class="online-indicator"></span>
+                                                    </div>
+                                                    <div>
+                                                        <div class="student-name">Maria Garcia</div>
+                                                        <div class="student-id"><i class="fas fa-id-card me-1"></i>#STU-002 • Year 1</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-badge">
+                                                    <i class="fas fa-chart-line" style="color: #f59e0b;"></i>
+                                                    <span>Data Analytics</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="text-secondary small">
+                                                    <i class="far fa-calendar-alt me-1"></i>Oct 23, 2026
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="gpa-tag">
+                                                    <i class="fas fa-star text-warning" style="font-size: 0.75rem;"></i>
+                                                    <span>3.8 GPA</span>
+                                                </div>
+                                                <div class="progress mt-1" style="height: 3px; width: 60px; background: rgba(255,255,255,0.08);">
+                                                    <div class="progress-bar" style="width: 88%; background: #f59e0b;"></div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="status-pill active">
+                                                    <span class="status-dot"></span> Active
+                                                </span>
+                                            </td>
+                                            <td class="text-end">
+                                                <a href="students.html" class="action-icon-btn" title="View Profile">
+                                                    <i class="fas fa-external-link-alt" style="font-size: 0.8rem;"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-3">
+                                                    <div class="student-avatar-box">
+                                                        <img src="https://ui-avatars.com/api/?name=James+Smith&background=f97316&color=fff" class="student-avatar" alt="James">
+                                                        <span class="online-indicator" style="background-color: #f59e0b;"></span>
+                                                    </div>
+                                                    <div>
+                                                        <div class="student-name">James Smith</div>
+                                                        <div class="student-id"><i class="fas fa-id-card me-1"></i>#STU-003 • Year 3</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-badge">
+                                                    <i class="fas fa-code" style="color: #f97316;"></i>
+                                                    <span>Web Development</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="text-secondary small">
+                                                    <i class="far fa-calendar-alt me-1"></i>Oct 21, 2026
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="gpa-tag">
+                                                    <i class="fas fa-star text-secondary" style="font-size: 0.75rem;"></i>
+                                                    <span>Reviewing</span>
+                                                </div>
+                                                <div class="progress mt-1" style="height: 3px; width: 60px; background: rgba(255,255,255,0.08);">
+                                                    <div class="progress-bar" style="width: 50%; background: #f97316;"></div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="status-pill pending">
+                                                    <span class="status-dot"></span> Pending
+                                                </span>
+                                            </td>
+                                            <td class="text-end">
+                                                <a href="students.html" class="action-icon-btn" title="View Profile">
+                                                    <i class="fas fa-external-link-alt" style="font-size: 0.8rem;"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-3">
+                                                    <div class="student-avatar-box">
+                                                        <img src="https://ui-avatars.com/api/?name=Sophia+Chen&background=6366f1&color=fff" class="student-avatar" alt="Sophia">
+                                                        <span class="online-indicator"></span>
+                                                    </div>
+                                                    <div>
+                                                        <div class="student-name">Sophia Chen</div>
+                                                        <div class="student-id"><i class="fas fa-id-card me-1"></i>#STU-004 • Year 2</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="course-badge">
+                                                    <i class="fas fa-brain" style="color: #818cf8;"></i>
+                                                    <span>AI & Machine Learning</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="text-secondary small">
+                                                    <i class="far fa-calendar-alt me-1"></i>Oct 19, 2026
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="gpa-tag">
+                                                    <i class="fas fa-star text-warning" style="font-size: 0.75rem;"></i>
+                                                    <span>4.0 GPA</span>
+                                                </div>
+                                                <div class="progress mt-1" style="height: 3px; width: 60px; background: rgba(255,255,255,0.08);">
+                                                    <div class="progress-bar" style="width: 98%; background: #6366f1;"></div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="status-pill active">
+                                                    <span class="status-dot"></span> Active
+                                                </span>
+                                            </td>
+                                            <td class="text-end">
+                                                <a href="students.html" class="action-icon-btn" title="View Profile">
+                                                    <i class="fas fa-external-link-alt" style="font-size: 0.8rem;"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Recent Activity Feed -->
+                    <div class="col-lg-4">
+                        <div class="chart-card p-4 h-100">
+                            <h5 class="section-title mb-4">Recent Activity</h5>
+                            <div>
+                                <div class="activity-item">
+                                    <div class="activity-dot" style="background:#10b981; box-shadow: 0 0 8px #10b981;"></div>
+                                    <div>
+                                        <div class="text-white small fw-semibold">New student enrolled</div>
+                                        <div class="text-secondary" style="font-size:0.78rem;">Alex Johnson joined Computer Science</div>
+                                        <div class="text-secondary" style="font-size:0.72rem;"><i class="fas fa-clock me-1"></i>2 min ago</div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-dot" style="background:#f59e0b; box-shadow: 0 0 8px #f59e0b;"></div>
+                                    <div>
+                                        <div class="text-white small fw-semibold">Course curriculum updated</div>
+                                        <div class="text-secondary" style="font-size:0.78rem;">Web Development syllabus revised</div>
+                                        <div class="text-secondary" style="font-size:0.72rem;"><i class="fas fa-clock me-1"></i>15 min ago</div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-dot" style="background:#f97316; box-shadow: 0 0 8px #f97316;"></div>
+                                    <div>
+                                        <div class="text-white small fw-semibold">Tuition payment received</div>
+                                        <div class="text-secondary" style="font-size:0.78rem;">$2,400 from Maria Garcia</div>
+                                        <div class="text-secondary" style="font-size:0.72rem;"><i class="fas fa-clock me-1"></i>1 hour ago</div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-dot" style="background:#f43f5e; box-shadow: 0 0 8px #f43f5e;"></div>
+                                    <div>
+                                        <div class="text-white small fw-semibold">Faculty notice</div>
+                                        <div class="text-secondary" style="font-size:0.78rem;">Ms. Emily Davis submitted leave request</div>
+                                        <div class="text-secondary" style="font-size:0.72rem;"><i class="fas fa-clock me-1"></i>3 hours ago</div>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-dot" style="background:#14b8a6; box-shadow: 0 0 8px #14b8a6;"></div>
+                                    <div>
+                                        <div class="text-white small fw-semibold">Exam scheduled</div>
+                                        <div class="text-secondary" style="font-size:0.78rem;">Mid-term examinations set for Nov 15</div>
+                                        <div class="text-secondary" style="font-size:0.72rem;"><i class="fas fa-clock me-1"></i>5 hours ago</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses - Student Management Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="preloader"><div class="spinner"></div></div>
+    <canvas id="star-canvas"></canvas>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="glass-panel" id="sidebar">
+            <div class="sidebar-heading text-center py-4 fs-4 fw-bold text-uppercase border-bottom border-secondary">
+                <i class="fa-solid fa-graduation-cap me-2 text-info"></i>EduAdmin
+            </div>
+            <div class="list-group list-group-flush my-3">
+                <a href="index.html" class="list-group-item list-group-item-action bg-transparent"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
+                <a href="students.html" class="list-group-item list-group-item-action bg-transparent"><i class="fas fa-user-graduate me-2"></i>Students</a>
+                <a href="teachers.html" class="list-group-item list-group-item-action bg-transparent"><i class="fas fa-chalkboard-teacher me-2"></i>Teachers</a>
+                <a href="courses.html" class="list-group-item list-group-item-action bg-transparent active"><i class="fas fa-book me-2"></i>Courses</a>
+                <a href="reports.html" class="list-group-item list-group-item-action bg-transparent"><i class="fas fa-chart-line me-2"></i>Reports</a>
+                <a href="settings.html" class="list-group-item list-group-item-action bg-transparent"><i class="fas fa-cog me-2"></i>Settings</a>
+            </div>
+        </div>
+        <!-- Page Content -->
+        <div id="page-content-wrapper" class="w-100">
+            <nav class="navbar navbar-expand-lg glass-panel py-3 px-4 mb-4">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-align-left fs-4 me-3 text-white" id="menu-toggle"></i>
+                    <h2 class="fs-4 m-0 text-white">Courses</h2>
+                </div>
+            </nav>
+            <div class="container-fluid px-4">
+                <!-- Course Cards -->
+                <div class="row g-4 mb-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card glass-card p-4 shadow-sm h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="icon-box bg-info text-dark rounded-3 d-flex justify-content-center align-items-center me-3" style="width:50px;height:50px;">
+                                    <i class="fas fa-laptop-code fs-4"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-white mb-0">Computer Science</h5>
+                                    <small class="text-secondary">CS-101</small>
+                                </div>
+                            </div>
+                            <p class="text-secondary small mb-3">Explore algorithms, data structures, operating systems, and software engineering fundamentals.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-white"><i class="fas fa-users me-1 text-info"></i> 320 Students</span>
+                                <span class="badge bg-success rounded-pill px-3 py-2">Active</span>
+                            </div>
+                            <div class="progress mt-3" style="height:6px;">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 85%"></div>
+                            </div>
+                            <small class="text-secondary mt-1">85% Enrollment Capacity</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card glass-card p-4 shadow-sm h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="icon-box bg-success text-white rounded-3 d-flex justify-content-center align-items-center me-3" style="width:50px;height:50px;">
+                                    <i class="fas fa-chart-bar fs-4"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-white mb-0">Data Analytics</h5>
+                                    <small class="text-secondary">DA-201</small>
+                                </div>
+                            </div>
+                            <p class="text-secondary small mb-3">Master data visualization, statistical analysis, Python, and machine learning basics.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-white"><i class="fas fa-users me-1 text-success"></i> 245 Students</span>
+                                <span class="badge bg-success rounded-pill px-3 py-2">Active</span>
+                            </div>
+                            <div class="progress mt-3" style="height:6px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 72%"></div>
+                            </div>
+                            <small class="text-secondary mt-1">72% Enrollment Capacity</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card glass-card p-4 shadow-sm h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="icon-box bg-warning text-dark rounded-3 d-flex justify-content-center align-items-center me-3" style="width:50px;height:50px;">
+                                    <i class="fas fa-code fs-4"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-white mb-0">Web Development</h5>
+                                    <small class="text-secondary">WD-301</small>
+                                </div>
+                            </div>
+                            <p class="text-secondary small mb-3">Build modern web apps with HTML, CSS, JavaScript, React, Node.js and cloud deployment.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-white"><i class="fas fa-users me-1 text-warning"></i> 180 Students</span>
+                                <span class="badge bg-success rounded-pill px-3 py-2">Active</span>
+                            </div>
+                            <div class="progress mt-3" style="height:6px;">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 60%"></div>
+                            </div>
+                            <small class="text-secondary mt-1">60% Enrollment Capacity</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card glass-card p-4 shadow-sm h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="icon-box bg-danger text-white rounded-3 d-flex justify-content-center align-items-center me-3" style="width:50px;height:50px;">
+                                    <i class="fas fa-shield-alt fs-4"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-white mb-0">Cyber Security</h5>
+                                    <small class="text-secondary">CY-401</small>
+                                </div>
+                            </div>
+                            <p class="text-secondary small mb-3">Learn network security, ethical hacking, cryptography, and incident response techniques.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-white"><i class="fas fa-users me-1 text-danger"></i> 150 Students</span>
+                                <span class="badge bg-warning text-dark rounded-pill px-3 py-2">Filling Up</span>
+                            </div>
+                            <div class="progress mt-3" style="height:6px;">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 92%"></div>
+                            </div>
+                            <small class="text-secondary mt-1">92% Enrollment Capacity</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card glass-card p-4 shadow-sm h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="icon-box rounded-3 d-flex justify-content-center align-items-center me-3" style="width:50px;height:50px;background:#0dcaf0;color:#000;">
+                                    <i class="fas fa-brain fs-4"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-white mb-0">AI & Machine Learning</h5>
+                                    <small class="text-secondary">AI-501</small>
+                                </div>
+                            </div>
+                            <p class="text-secondary small mb-3">Deep learning, neural networks, NLP, computer vision and model deployment at scale.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-white"><i class="fas fa-users me-1 text-info"></i> 200 Students</span>
+                                <span class="badge bg-success rounded-pill px-3 py-2">Active</span>
+                            </div>
+                            <div class="progress mt-3" style="height:6px;">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 78%"></div>
+                            </div>
+                            <small class="text-secondary mt-1">78% Enrollment Capacity</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card glass-card p-4 shadow-sm h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="icon-box rounded-3 d-flex justify-content-center align-items-center me-3" style="width:50px;height:50px;background:#20c997;color:#fff;">
+                                    <i class="fas fa-mobile-alt fs-4"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-white mb-0">Mobile App Dev</h5>
+                                    <small class="text-secondary">MA-601</small>
+                                </div>
+                            </div>
+                            <p class="text-secondary small mb-3">Build cross-platform mobile applications with React Native, Flutter and SwiftUI.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-white"><i class="fas fa-users me-1" style="color:#20c997;"></i> 130 Students</span>
+                                <span class="badge bg-success rounded-pill px-3 py-2">Active</span>
+                            </div>
+                            <div class="progress mt-3" style="height:6px;">
+                                <div class="progress-bar" role="progressbar" style="width: 55%;background:#20c997;"></div>
+                            </div>
+                            <small class="text-secondary mt-1">55% Enrollment Capacity</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

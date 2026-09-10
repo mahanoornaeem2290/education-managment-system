@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students - Student Management Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="preloader"><div class="spinner"></div></div>
+    <canvas id="star-canvas"></canvas>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="glass-panel" id="sidebar">
+            <div class="sidebar-heading text-center py-4 fs-4 fw-bold text-uppercase border-bottom border-secondary">
+                <i class="fa-solid fa-graduation-cap me-2 text-info"></i>EduAdmin
+            </div>
+            <div class="list-group list-group-flush my-3">
+                <a href="index.html" class="list-group-item list-group-item-action bg-transparent"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
+                <a href="students.html" class="list-group-item list-group-item-action bg-transparent active"><i class="fas fa-user-graduate me-2"></i>Students</a>
+                <a href="teachers.html" class="list-group-item list-group-item-action bg-transparent"><i class="fas fa-chalkboard-teacher me-2"></i>Teachers</a>
+                <a href="courses.html" class="list-group-item list-group-item-action bg-transparent"><i class="fas fa-book me-2"></i>Courses</a>
+                <a href="reports.html" class="list-group-item list-group-item-action bg-transparent"><i class="fas fa-chart-line me-2"></i>Reports</a>
+                <a href="settings.html" class="list-group-item list-group-item-action bg-transparent"><i class="fas fa-cog me-2"></i>Settings</a>
+            </div>
+        </div>
+        <!-- Page Content -->
+        <div id="page-content-wrapper" class="w-100">
+            <nav class="navbar navbar-expand-lg glass-panel py-3 px-4 mb-4">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-align-left fs-4 me-3 text-white" id="menu-toggle"></i>
+                    <h2 class="fs-4 m-0 text-white">Students</h2>
+                </div>
+            </nav>
+            <div class="container-fluid px-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3 class="page-title text-white">Student List</h3>
+                    <button class="btn btn-outline-info" id="addStudentBtn"><i class="fas fa-plus me-2"></i>Add Student</button>
+                </div>
+                <div class="card glass-card p-4 shadow-sm">
+                    <div class="table-responsive">
+                        <table class="table table-borderless table-hover text-white mb-0 custom-table">
+                            <thead>
+                                <tr class="text-secondary border-bottom border-secondary">
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Course</th>
+                                    <th>Enrolled</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#STU-001</td>
+                                    <td><img src="https://ui-avatars.com/api/?name=Alex+Johnson&background=random" class="rounded-circle me-2" width="30">Alex Johnson</td>
+                                    <td>Computer Science</td>
+                                    <td>Oct 24, 2026</td>
+                                    <td><span class="badge bg-success rounded-pill px-3 py-2">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#STU-002</td>
+                                    <td><img src="https://ui-avatars.com/api/?name=Maria+Garcia&background=random" class="rounded-circle me-2" width="30">Maria Garcia</td>
+                                    <td>Data Analytics</td>
+                                    <td>Oct 23, 2026</td>
+                                    <td><span class="badge bg-success rounded-pill px-3 py-2">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#STU-003</td>
+                                    <td><img src="https://ui-avatars.com/api/?name=James+Smith&background=random" class="rounded-circle me-2" width="30">James Smith</td>
+                                    <td>Web Development</td>
+                                    <td>Oct 21, 2026</td>
+                                    <td><span class="badge bg-warning text-dark rounded-pill px-3 py-2">Pending</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add Student Modal -->
+    <div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="addStudentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content glass-panel">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="addStudentModalLabel"><i class="fas fa-user-plus me-2"></i>Add New Student</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label text-white">Full Name</label>
+                            <input type="text" class="form-control bg-dark text-white border-secondary" placeholder="John Doe">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-white">Course</label>
+                            <select class="form-select bg-dark text-white border-secondary">
+                                <option>Computer Science</option>
+                                <option>Data Analytics</option>
+                                <option>Web Development</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-white">Enrollment Date</label>
+                            <input type="date" class="form-control bg-dark text-white border-secondary">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-outline-info">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
